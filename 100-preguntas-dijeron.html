@@ -1,0 +1,1817 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>100 Preguntas Dijeron - Show TV Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --blue-intense: #0066FF;
+            --blue-dark: #001A4D;
+            --yellow-bright: #FFD700;
+            --pink-accent: #FF1493;
+            --bg-gradient-start: #001A4D;
+            --bg-gradient-end: #000A26;
+            --glow-color: rgba(0, 102, 255, 0.4);
+        }
+
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 20, 147, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(0, 102, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        /* ANIMACIONES */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px var(--glow-color); }
+            50% { box-shadow: 0 0 40px var(--glow-color), 0 0 60px var(--glow-color); }
+        }
+
+        @keyframes reveal {
+            0% { 
+                transform: rotateY(90deg);
+                opacity: 0;
+            }
+            100% { 
+                transform: rotateY(0deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1) rotate(180deg); }
+        }
+
+        /* LOGO */
+        .logo {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .logo h1 {
+            font-family: 'Righteous', cursive;
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, var(--yellow-bright) 0%, var(--pink-accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .logo p {
+            color: var(--yellow-bright);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        /* BOTONES */
+        .btn {
+            width: 100%;
+            padding: 18px 24px;
+            border: none;
+            border-radius: 20px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--blue-intense) 0%, #0052CC 100%);
+            color: white;
+            box-shadow: 0 8px 20px rgba(0, 102, 255, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+            box-shadow: 0 4px 10px rgba(0, 102, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--pink-accent) 0%, #CC0066 100%);
+            color: white;
+            box-shadow: 0 8px 20px rgba(255, 20, 147, 0.4);
+        }
+
+        .btn-secondary:active {
+            transform: scale(0.98);
+            box-shadow: 0 4px 10px rgba(255, 20, 147, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--yellow-bright) 0%, #FFA500 100%);
+            color: var(--blue-dark);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-success:active {
+            transform: scale(0.98);
+        }
+
+        /* INPUT */
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 18px 20px;
+            border: 3px solid var(--blue-intense);
+            border-radius: 15px;
+            background: rgba(0, 26, 77, 0.6);
+            color: white;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--yellow-bright);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        /* PANTALLAS */
+        .screen {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        /* SALA */
+        .sala-info {
+            background: rgba(0, 26, 77, 0.8);
+            border: 3px solid var(--blue-intense);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .sala-code {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--yellow-bright);
+            letter-spacing: 8px;
+            margin: 20px 0;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .waiting {
+            margin-top: 30px;
+        }
+
+        .waiting-dots {
+            display: inline-flex;
+            gap: 8px;
+        }
+
+        .waiting-dots span {
+            width: 12px;
+            height: 12px;
+            background: var(--pink-accent);
+            border-radius: 50%;
+            animation: pulse 1.4s ease-in-out infinite;
+        }
+
+        .waiting-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .waiting-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        /* JUGADORES */
+        .players-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .player-card {
+            flex: 1;
+            background: rgba(0, 26, 77, 0.8);
+            border: 3px solid var(--blue-intense);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .player-card.active {
+            border-color: var(--yellow-bright);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        .player-name {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: white;
+        }
+
+        .player-score {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--yellow-bright);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        /* PREGUNTA */
+        .question-container {
+            background: rgba(0, 26, 77, 0.9);
+            border: 3px solid var(--pink-accent);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.3);
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+            line-height: 1.4;
+        }
+
+        /* TABLERO DE RESPUESTAS */
+        .board {
+            background: rgba(0, 26, 77, 0.6);
+            border: 4px solid var(--blue-intense);
+            border-radius: 25px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .answers-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .answer-card {
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.3) 0%, rgba(0, 26, 77, 0.6) 100%);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 60px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .answer-card.revealed {
+            background: linear-gradient(135deg, var(--yellow-bright) 0%, #FFA500 100%);
+            border-color: var(--yellow-bright);
+            animation: reveal 0.6s ease-out;
+        }
+
+        .answer-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--yellow-bright);
+            width: 40px;
+            text-align: center;
+        }
+
+        .answer-card.revealed .answer-number {
+            color: var(--blue-dark);
+        }
+
+        .answer-text {
+            flex: 1;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            text-align: left;
+            padding: 0 15px;
+        }
+
+        .answer-card.revealed .answer-text {
+            color: var(--blue-dark);
+        }
+
+        .answer-text.hidden::after {
+            content: '???';
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .answer-points {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--pink-accent);
+            min-width: 60px;
+            text-align: right;
+        }
+
+        .answer-card.revealed .answer-points {
+            color: var(--blue-dark);
+            animation: sparkle 0.6s ease-out;
+        }
+
+        /* TEMPORIZADOR */
+        .timer-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .timer {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pink-accent) 0%, #CC0066 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.5);
+            position: relative;
+        }
+
+        .timer.warning {
+            animation: pulse 0.5s ease-in-out infinite;
+        }
+
+        .timer-circle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            border-top-color: var(--yellow-bright);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* CONTROLES DE RESPUESTA */
+        .answer-controls {
+            background: rgba(0, 26, 77, 0.8);
+            border: 3px solid var(--blue-intense);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .answer-controls input {
+            width: 100%;
+            padding: 18px 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            background: rgba(0, 10, 38, 0.6);
+            color: white;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .answer-controls input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .answer-controls input:focus {
+            outline: none;
+            border-color: var(--yellow-bright);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        /* ROBO DE PUNTOS */
+        .robbery-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .robbery-overlay.active {
+            display: flex;
+        }
+
+        .robbery-content {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .robbery-title {
+            font-family: 'Righteous', cursive;
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--yellow-bright) 0%, var(--pink-accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        .robbery-points {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--yellow-bright);
+            margin-bottom: 10px;
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+        }
+
+        /* RESULTADO FINAL */
+        .result-screen {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .result-title {
+            font-family: 'Righteous', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .winner {
+            color: var(--yellow-bright);
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+        }
+
+        .loser {
+            color: var(--pink-accent);
+        }
+
+        .final-score {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--yellow-bright);
+            margin: 20px 0;
+        }
+
+        /* AD SCREEN */
+        .ad-screen {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 40px 20px;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .ad-content {
+            background: rgba(0, 26, 77, 0.8);
+            border: 3px solid var(--blue-intense);
+            border-radius: 20px;
+            padding: 40px 20px;
+            margin-bottom: 20px;
+        }
+
+        .ad-title {
+            font-size: 1.5rem;
+            color: var(--yellow-bright);
+            margin-bottom: 20px;
+        }
+
+        .ad-placeholder {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 60px 20px;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.2rem;
+        }
+
+        /* RANKING */
+        .ranking-list {
+            background: rgba(0, 26, 77, 0.8);
+            border: 3px solid var(--blue-intense);
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .ranking-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: rgba(0, 102, 255, 0.2);
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .ranking-item.top-1 {
+            background: linear-gradient(135deg, var(--yellow-bright) 0%, #FFA500 100%);
+            border-color: var(--yellow-bright);
+        }
+
+        .ranking-item.top-1 * {
+            color: var(--blue-dark) !important;
+        }
+
+        .ranking-position {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--yellow-bright);
+            min-width: 40px;
+        }
+
+        .ranking-name {
+            flex: 1;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 0 15px;
+        }
+
+        .ranking-score {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--pink-accent);
+        }
+
+        /* UTILIDADES */
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        .small-text {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* EFECTOS DE SONIDO VISUALES */
+        .sound-wave {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            border: 3px solid var(--yellow-bright);
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .sound-wave.active {
+            animation: soundPulse 0.6s ease-out;
+        }
+
+        @keyframes soundPulse {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(2);
+                opacity: 0;
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 380px) {
+            .logo h1 {
+                font-size: 1.8rem;
+            }
+            
+            .question-text {
+                font-size: 1.1rem;
+            }
+            
+            .answer-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sound-wave" id="soundWave"></div>
+
+    <div class="container">
+        <!-- PANTALLA DE INICIO -->
+        <div class="screen active" id="homeScreen">
+            <div class="logo">
+                <h1>100 PREGUNTAS<br>DIJERON</h1>
+                <p>Show TV Online</p>
+            </div>
+
+            <button class="btn btn-primary" onclick="createRoom()">
+                🎮 CREAR SALA
+            </button>
+
+            <div class="input-group">
+                <input type="text" id="joinRoomCode" placeholder="CÓDIGO" maxlength="6">
+            </div>
+            <button class="btn btn-secondary" onclick="joinRoom()">
+                🚪 UNIRSE A SALA
+            </button>
+
+            <button class="btn btn-success" onclick="quickMatch()">
+                ⚡ PARTIDA RÁPIDA
+            </button>
+
+            <div class="mt-20 text-center">
+                <button class="btn btn-primary" onclick="showRanking()">
+                    🏆 RANKING GLOBAL
+                </button>
+            </div>
+        </div>
+
+        <!-- PANTALLA DE SALA -->
+        <div class="screen" id="roomScreen">
+            <div class="logo">
+                <h1>SALA CREADA</h1>
+            </div>
+
+            <div class="sala-info">
+                <p class="mb-20">Código de Sala:</p>
+                <div class="sala-code" id="roomCode">------</div>
+                <p class="small-text">Comparte este código con tu oponente</p>
+
+                <div class="waiting">
+                    <p>Esperando jugador</p>
+                    <div class="waiting-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <input type="text" id="playerName" placeholder="TU NOMBRE" maxlength="15">
+            </div>
+
+            <button class="btn btn-secondary" onclick="cancelRoom()">
+                ❌ CANCELAR
+            </button>
+        </div>
+
+        <!-- PANTALLA DE JUEGO -->
+        <div class="screen" id="gameScreen">
+            <!-- Jugadores -->
+            <div class="players-container">
+                <div class="player-card" id="player1Card">
+                    <div class="player-name" id="player1Name">Jugador 1</div>
+                    <div class="player-score" id="player1Score">0</div>
+                </div>
+                <div class="player-card" id="player2Card">
+                    <div class="player-name" id="player2Name">Jugador 2</div>
+                    <div class="player-score" id="player2Score">0</div>
+                </div>
+            </div>
+
+            <!-- Temporizador -->
+            <div class="timer-container">
+                <div class="timer" id="timer">
+                    <div class="timer-circle"></div>
+                    <span id="timerValue">20</span>
+                </div>
+            </div>
+
+            <!-- Pregunta -->
+            <div class="question-container">
+                <div class="question-text" id="questionText">¿Cargando pregunta...?</div>
+            </div>
+
+            <!-- Tablero -->
+            <div class="board">
+                <div class="answers-grid" id="answersGrid">
+                    <!-- Las respuestas se generan dinámicamente -->
+                </div>
+            </div>
+
+            <!-- Controles -->
+            <div class="answer-controls">
+                <input type="text" id="answerInput" placeholder="Escribe tu respuesta...">
+                <button class="btn btn-success" onclick="submitAnswer()">
+                    ✅ RESPONDER
+                </button>
+            </div>
+        </div>
+
+        <!-- PANTALLA DE RESULTADO -->
+        <div class="screen" id="resultScreen">
+            <div class="result-screen">
+                <div class="result-title winner" id="resultTitle">¡GANASTE!</div>
+                <div class="final-score" id="finalScore">0</div>
+                <p class="mb-20" id="resultMessage">Puntos totales</p>
+
+                <button class="btn btn-primary" onclick="playAgain()">
+                    🔄 JUGAR DE NUEVO
+                </button>
+
+                <button class="btn btn-secondary mt-20" onclick="goHome()">
+                    🏠 MENÚ PRINCIPAL
+                </button>
+            </div>
+        </div>
+
+        <!-- PANTALLA DE ANUNCIO -->
+        <div class="screen" id="adScreen">
+            <div class="ad-screen">
+                <div class="ad-content">
+                    <div class="ad-title">📺 Pausa Publicitaria</div>
+                    <div class="ad-placeholder">
+                        [ Espacio para Anuncio ]
+                    </div>
+                    <p class="small-text">Continúa en <span id="adCountdown">5</span> segundos...</p>
+                </div>
+                
+                <button class="btn btn-success" onclick="skipAd()" id="skipAdBtn" style="display: none;">
+                    ⏭️ SALTAR ANUNCIO
+                </button>
+            </div>
+        </div>
+
+        <!-- PANTALLA DE RANKING -->
+        <div class="screen" id="rankingScreen">
+            <div class="logo">
+                <h1>🏆 RANKING GLOBAL</h1>
+            </div>
+
+            <div class="ranking-list" id="rankingList">
+                <!-- El ranking se genera dinámicamente -->
+            </div>
+
+            <button class="btn btn-secondary mt-20" onclick="goHome()">
+                🏠 VOLVER
+            </button>
+        </div>
+    </div>
+
+    <!-- OVERLAY DE ROBO -->
+    <div class="robbery-overlay" id="robberyOverlay">
+        <div class="robbery-content">
+            <div class="robbery-title">🎯 ROBO DE PUNTOS</div>
+            <div class="robbery-points" id="robberyPoints">+500</div>
+            <p style="font-size: 1.2rem; color: white;">¡Última respuesta revelada!</p>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
+    <script>
+        // ============================================
+        // CONFIGURACIÓN DE FIREBASE
+        // ============================================
+        // IMPORTANTE: Reemplaza con tu configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyAJY8-1IRoiexj3D2jlDlas9AUqgznZuKE",
+  authDomain: "nacos-dijeron.firebaseapp.com",
+  databaseURL: "https://nacos-dijeron-default-rtdb.firebaseio.com",
+  projectId: "nacos-dijeron",
+  storageBucket: "nacos-dijeron.firebasestorage.app",
+  messagingSenderId: "191149830690",
+  appId: "1:191149830690:web:9c56940b6f322d7b17107b",
+        };
+
+        // Inicializar Firebase
+        let app, database;
+        try {
+            app = firebase.initializeApp(firebaseConfig);
+            database = firebase.database();
+            console.log('Firebase inicializado correctamente');
+        } catch (error) {
+            console.error('Error al inicializar Firebase:', error);
+            alert('Error de conexión. Por favor, configura Firebase correctamente.');
+        }
+
+        // ============================================
+        // PREGUNTAS Y RESPUESTAS
+        // ============================================
+        const QUESTIONS = [
+            {
+                question: "Nombra algo que la gente hace en la playa",
+                answers: [
+                    { text: "Nadar", points: 45 },
+                    { text: "Tomar el sol", points: 30 },
+                    { text: "Jugar voleibol", points: 15 },
+                    { text: "Construir castillos de arena", points: 25 },
+                    { text: "Comer", points: 20 },
+                    { text: "Tomar fotos", points: 18 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "¿Qué superhéroe es el más popular?",
+                answers: [
+                    { text: "Spider-Man", points: 40 },
+                    { text: "Batman", points: 35 },
+                    { text: "Superman", points: 30 },
+                    { text: "Iron Man", points: 25 },
+                    { text: "Capitán América", points: 20 },
+                    { text: "Hulk", points: 15 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "Nombra una profesión que requiere uniforme",
+                answers: [
+                    { text: "Policía", points: 45 },
+                    { text: "Médico/Enfermera", points: 35 },
+                    { text: "Bombero", points: 30 },
+                    { text: "Piloto", points: 25 },
+                    { text: "Chef", points: 20 },
+                    { text: "Militar", points: 28 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "¿Qué animal es considerado el mejor amigo del hombre?",
+                answers: [
+                    { text: "Perro", points: 80 },
+                    { text: "Gato", points: 30 },
+                    { text: "Caballo", points: 15 },
+                    { text: "Loro", points: 10 },
+                    { text: "Conejo", points: 8 },
+                    { text: "Pez", points: 5 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "Nombra algo que encuentras en un supermercado",
+                answers: [
+                    { text: "Frutas y verduras", points: 40 },
+                    { text: "Leche", points: 35 },
+                    { text: "Pan", points: 30 },
+                    { text: "Carne", points: 28 },
+                    { text: "Galletas", points: 22 },
+                    { text: "Refrescos", points: 25 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "¿Qué deporte es el más visto en el mundo?",
+                answers: [
+                    { text: "Fútbol", points: 60 },
+                    { text: "Baloncesto", points: 25 },
+                    { text: "Béisbol", points: 20 },
+                    { text: "Tenis", points: 18 },
+                    { text: "Box", points: 15 },
+                    { text: "Atletismo", points: 12 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "Nombra algo que la gente olvida frecuentemente",
+                answers: [
+                    { text: "Llaves", points: 40 },
+                    { text: "Celular", points: 35 },
+                    { text: "Cartera", points: 30 },
+                    { text: "Contraseñas", points: 25 },
+                    { text: "Nombres", points: 22 },
+                    { text: "Aniversarios", points: 20 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "¿Qué comida es típica mexicana?",
+                answers: [
+                    { text: "Tacos", points: 50 },
+                    { text: "Enchiladas", points: 30 },
+                    { text: "Pozole", points: 25 },
+                    { text: "Tamales", points: 28 },
+                    { text: "Quesadillas", points: 35 },
+                    { text: "Mole", points: 20 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "Nombra un lugar romántico para una cita",
+                answers: [
+                    { text: "Restaurante", points: 40 },
+                    { text: "Playa", points: 35 },
+                    { text: "Cine", points: 30 },
+                    { text: "Parque", points: 25 },
+                    { text: "Mirador", points: 20 },
+                    { text: "Museo", points: 15 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "¿Qué instrumento musical es el más popular?",
+                answers: [
+                    { text: "Guitarra", points: 45 },
+                    { text: "Piano", points: 35 },
+                    { text: "Batería", points: 25 },
+                    { text: "Violín", points: 20 },
+                    { text: "Flauta", points: 15 },
+                    { text: "Trompeta", points: 12 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "Nombra algo que la gente hace al despertar",
+                answers: [
+                    { text: "Estirar", points: 35 },
+                    { text: "Bostezar", points: 40 },
+                    { text: "Ir al baño", points: 30 },
+                    { text: "Ver el celular", points: 45 },
+                    { text: "Desayunar", points: 25 },
+                    { text: "Bañarse", points: 28 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "¿Qué color es el más usado en logotipos?",
+                answers: [
+                    { text: "Azul", points: 40 },
+                    { text: "Rojo", points: 35 },
+                    { text: "Negro", points: 30 },
+                    { text: "Verde", points: 20 },
+                    { text: "Amarillo", points: 18 },
+                    { text: "Naranja", points: 15 }
+                ],
+                difficulty: "difícil"
+            },
+            {
+                question: "Nombra algo que la gente colecciona",
+                answers: [
+                    { text: "Monedas", points: 35 },
+                    { text: "Estampillas", points: 25 },
+                    { text: "Cartas de juego", points: 30 },
+                    { text: "Figuras de acción", points: 28 },
+                    { text: "Zapatos", points: 22 },
+                    { text: "Libros", points: 20 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "¿Qué aplicación usas más en tu celular?",
+                answers: [
+                    { text: "WhatsApp", points: 50 },
+                    { text: "Facebook", points: 30 },
+                    { text: "Instagram", points: 35 },
+                    { text: "TikTok", points: 28 },
+                    { text: "YouTube", points: 40 },
+                    { text: "Twitter/X", points: 18 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "Nombra un regalo típico para el Día de las Madres",
+                answers: [
+                    { text: "Flores", points: 45 },
+                    { text: "Chocolates", points: 30 },
+                    { text: "Perfume", points: 25 },
+                    { text: "Joyería", points: 28 },
+                    { text: "Ropa", points: 20 },
+                    { text: "Desayuno en cama", points: 22 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "¿Qué marca de carro es la más reconocida?",
+                answers: [
+                    { text: "Toyota", points: 35 },
+                    { text: "Ford", points: 30 },
+                    { text: "Chevrolet", points: 28 },
+                    { text: "Volkswagen", points: 25 },
+                    { text: "Nissan", points: 22 },
+                    { text: "Honda", points: 20 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "Nombra algo que haces antes de dormir",
+                answers: [
+                    { text: "Cepillar los dientes", points: 40 },
+                    { text: "Ver el celular", points: 45 },
+                    { text: "Leer", points: 20 },
+                    { text: "Ver TV", points: 30 },
+                    { text: "Ponerse pijama", points: 25 },
+                    { text: "Orar", points: 18 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "¿Qué película de Disney es la más famosa?",
+                answers: [
+                    { text: "El Rey León", points: 40 },
+                    { text: "Frozen", points: 35 },
+                    { text: "La Bella y la Bestia", points: 25 },
+                    { text: "Aladdin", points: 22 },
+                    { text: "La Sirenita", points: 20 },
+                    { text: "Toy Story", points: 28 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "Nombra algo que encuentras en una cocina",
+                answers: [
+                    { text: "Estufa", points: 40 },
+                    { text: "Refrigerador", points: 38 },
+                    { text: "Microondas", points: 30 },
+                    { text: "Platos", points: 25 },
+                    { text: "Cuchillos", points: 22 },
+                    { text: "Licuadora", points: 20 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "¿Qué ciudad es la más visitada en México?",
+                answers: [
+                    { text: "Cancún", points: 45 },
+                    { text: "Ciudad de México", points: 40 },
+                    { text: "Guadalajara", points: 20 },
+                    { text: "Playa del Carmen", points: 25 },
+                    { text: "Puerto Vallarta", points: 22 },
+                    { text: "Los Cabos", points: 18 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "Nombra una red social",
+                answers: [
+                    { text: "Facebook", points: 40 },
+                    { text: "Instagram", points: 38 },
+                    { text: "Twitter/X", points: 28 },
+                    { text: "TikTok", points: 35 },
+                    { text: "YouTube", points: 30 },
+                    { text: "Snapchat", points: 15 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "¿Qué le pones a tu café?",
+                answers: [
+                    { text: "Azúcar", points: 45 },
+                    { text: "Leche", points: 40 },
+                    { text: "Crema", points: 25 },
+                    { text: "Nada", points: 20 },
+                    { text: "Endulzante", points: 18 },
+                    { text: "Canela", points: 15 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "Nombra algo que compras en una farmacia",
+                answers: [
+                    { text: "Medicamentos", points: 50 },
+                    { text: "Vitaminas", points: 25 },
+                    { text: "Pasta de dientes", points: 22 },
+                    { text: "Shampoo", points: 20 },
+                    { text: "Jabón", points: 18 },
+                    { text: "Curitas", points: 15 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "¿Qué programa de TV es el más visto?",
+                answers: [
+                    { text: "Noticieros", points: 35 },
+                    { text: "Novelas", points: 40 },
+                    { text: "Fútbol", points: 45 },
+                    { text: "Reality shows", points: 25 },
+                    { text: "Series", points: 30 },
+                    { text: "Películas", points: 28 }
+                ],
+                difficulty: "difícil"
+            },
+            {
+                question: "Nombra algo que la gente le tiene miedo",
+                answers: [
+                    { text: "Arañas", points: 40 },
+                    { text: "Alturas", points: 35 },
+                    { text: "Oscuridad", points: 30 },
+                    { text: "Serpientes", points: 32 },
+                    { text: "Fantasmas", points: 25 },
+                    { text: "Payasos", points: 18 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "¿Qué estación del año prefieres?",
+                answers: [
+                    { text: "Verano", points: 40 },
+                    { text: "Primavera", points: 30 },
+                    { text: "Invierno", points: 28 },
+                    { text: "Otoño", points: 22 },
+                    { text: "Todas", points: 15 },
+                    { text: "Ninguna", points: 8 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "Nombra algo que haces en una fiesta",
+                answers: [
+                    { text: "Bailar", points: 45 },
+                    { text: "Comer", points: 40 },
+                    { text: "Platicar", points: 30 },
+                    { text: "Tomar fotos", points: 25 },
+                    { text: "Cantar", points: 22 },
+                    { text: "Jugar", points: 18 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "¿Qué necesitas para ir a la playa?",
+                answers: [
+                    { text: "Traje de baño", points: 45 },
+                    { text: "Bloqueador solar", points: 40 },
+                    { text: "Toalla", points: 35 },
+                    { text: "Lentes de sol", points: 25 },
+                    { text: "Sombrilla", points: 20 },
+                    { text: "Agua", points: 22 }
+                ],
+                difficulty: "normal"
+            },
+            {
+                question: "Nombra un trabajo peligroso",
+                answers: [
+                    { text: "Bombero", points: 40 },
+                    { text: "Policía", points: 38 },
+                    { text: "Construcción", points: 28 },
+                    { text: "Minero", points: 25 },
+                    { text: "Soldado", points: 35 },
+                    { text: "Electricista", points: 20 }
+                ],
+                difficulty: "difícil"
+            },
+            {
+                question: "¿Qué haces cuando estás aburrido?",
+                answers: [
+                    { text: "Ver TV", points: 40 },
+                    { text: "Usar el celular", points: 45 },
+                    { text: "Dormir", points: 30 },
+                    { text: "Leer", points: 20 },
+                    { text: "Jugar videojuegos", points: 35 },
+                    { text: "Salir", points: 22 }
+                ],
+                difficulty: "normal"
+            }
+        ];
+
+        // ============================================
+        // VARIABLES GLOBALES
+        // ============================================
+        let currentRoomId = null;
+        let currentPlayerId = null;
+        let currentPlayerName = '';
+        let gameState = null;
+        let timerInterval = null;
+        let soundEnabled = true;
+
+        // ============================================
+        // NAVEGACIÓN DE PANTALLAS
+        // ============================================
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        // ============================================
+        // EFECTOS DE SONIDO
+        // ============================================
+        function playSound(type) {
+            if (!soundEnabled) return;
+
+            const soundWave = document.getElementById('soundWave');
+            soundWave.classList.add('active');
+            setTimeout(() => soundWave.classList.remove('active'), 600);
+
+            // Aquí puedes agregar sonidos reales usando Web Audio API
+            // Por ahora solo mostramos el efecto visual
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            switch(type) {
+                case 'click':
+                    oscillator.frequency.value = 440;
+                    gainNode.gain.value = 0.1;
+                    oscillator.start();
+                    oscillator.stop(audioContext.currentTime + 0.1);
+                    break;
+                case 'correct':
+                    oscillator.frequency.value = 880;
+                    gainNode.gain.value = 0.2;
+                    oscillator.start();
+                    oscillator.stop(audioContext.currentTime + 0.2);
+                    break;
+                case 'wrong':
+                    oscillator.frequency.value = 220;
+                    gainNode.gain.value = 0.2;
+                    oscillator.start();
+                    oscillator.stop(audioContext.currentTime + 0.3);
+                    break;
+                case 'robbery':
+                    oscillator.frequency.value = 1000;
+                    gainNode.gain.value = 0.3;
+                    oscillator.start();
+                    oscillator.stop(audioContext.currentTime + 0.5);
+                    break;
+            }
+        }
+
+        // ============================================
+        // FUNCIONES DE SALA
+        // ============================================
+        function generateRoomCode() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let code = '';
+            for (let i = 0; i < 6; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return code;
+        }
+
+        async function createRoom() {
+            playSound('click');
+            const playerName = prompt('¿Cuál es tu nombre?', '');
+            if (!playerName) return;
+
+            currentPlayerName = playerName;
+            currentRoomId = generateRoomCode();
+            currentPlayerId = 'player1';
+
+            const roomData = {
+                code: currentRoomId,
+                player1: {
+                    id: 'player1',
+                    name: playerName,
+                    score: 0,
+                    connected: true
+                },
+                player2: null,
+                status: 'waiting',
+                currentTurn: 'player1',
+                currentQuestion: null,
+                revealedAnswers: [],
+                createdAt: Date.now()
+            };
+
+            try {
+                await database.ref('rooms/' + currentRoomId).set(roomData);
+                document.getElementById('roomCode').textContent = currentRoomId;
+                showScreen('roomScreen');
+
+                // Escuchar cuando se una el jugador 2
+                database.ref('rooms/' + currentRoomId).on('value', (snapshot) => {
+                    const room = snapshot.val();
+                    if (room && room.player2 && room.status === 'waiting') {
+                        startGame();
+                    }
+                });
+            } catch (error) {
+                console.error('Error al crear sala:', error);
+                alert('Error al crear la sala. Verifica tu conexión a Firebase.');
+            }
+        }
+
+        async function joinRoom() {
+            playSound('click');
+            const code = document.getElementById('joinRoomCode').value.toUpperCase();
+            if (!code || code.length !== 6) {
+                alert('Por favor ingresa un código válido de 6 caracteres');
+                return;
+            }
+
+            const playerName = prompt('¿Cuál es tu nombre?', '');
+            if (!playerName) return;
+
+            currentPlayerName = playerName;
+            currentRoomId = code;
+            currentPlayerId = 'player2';
+
+            try {
+                const roomSnapshot = await database.ref('rooms/' + code).once('value');
+                const room = roomSnapshot.val();
+
+                if (!room) {
+                    alert('La sala no existe');
+                    return;
+                }
+
+                if (room.player2) {
+                    alert('La sala está llena');
+                    return;
+                }
+
+                await database.ref('rooms/' + code + '/player2').set({
+                    id: 'player2',
+                    name: playerName,
+                    score: 0,
+                    connected: true
+                });
+
+                startGame();
+            } catch (error) {
+                console.error('Error al unirse a sala:', error);
+                alert('Error al unirse a la sala');
+            }
+        }
+
+        async function quickMatch() {
+            playSound('click');
+            const playerName = prompt('¿Cuál es tu nombre?', '');
+            if (!playerName) return;
+
+            currentPlayerName = playerName;
+
+            try {
+                // Buscar salas disponibles
+                const roomsSnapshot = await database.ref('rooms')
+                    .orderByChild('status')
+                    .equalTo('waiting')
+                    .limitToFirst(1)
+                    .once('value');
+
+                const rooms = roomsSnapshot.val();
+
+                if (rooms) {
+                    // Unirse a la primera sala disponible
+                    const roomId = Object.keys(rooms)[0];
+                    currentRoomId = roomId;
+                    currentPlayerId = 'player2';
+
+                    await database.ref('rooms/' + roomId + '/player2').set({
+                        id: 'player2',
+                        name: playerName,
+                        score: 0,
+                        connected: true
+                    });
+
+                    startGame();
+                } else {
+                    // Crear nueva sala
+                    createRoom();
+                }
+            } catch (error) {
+                console.error('Error en matchmaking:', error);
+                alert('Error al buscar partida');
+            }
+        }
+
+        function cancelRoom() {
+            playSound('click');
+            if (currentRoomId) {
+                database.ref('rooms/' + currentRoomId).remove();
+            }
+            currentRoomId = null;
+            currentPlayerId = null;
+            showScreen('homeScreen');
+        }
+
+        // ============================================
+        // LÓGICA DEL JUEGO
+        // ============================================
+        async function startGame() {
+            playSound('correct');
+            
+            try {
+                // Seleccionar pregunta aleatoria
+                const randomQuestion = QUESTIONS[Math.floor(Math.random() * QUESTIONS.length)];
+                
+                await database.ref('rooms/' + currentRoomId).update({
+                    status: 'playing',
+                    currentQuestion: randomQuestion,
+                    revealedAnswers: [],
+                    accumulatedPoints: 0,
+                    currentTurn: 'player1'
+                });
+
+                showScreen('gameScreen');
+                loadGameState();
+
+                // Escuchar cambios en el juego
+                database.ref('rooms/' + currentRoomId).on('value', (snapshot) => {
+                    gameState = snapshot.val();
+                    updateGameUI();
+                });
+
+                startTimer();
+            } catch (error) {
+                console.error('Error al iniciar juego:', error);
+            }
+        }
+
+        function loadGameState() {
+            database.ref('rooms/' + currentRoomId).once('value', (snapshot) => {
+                gameState = snapshot.val();
+                updateGameUI();
+            });
+        }
+
+        function updateGameUI() {
+            if (!gameState) return;
+
+            // Actualizar jugadores
+            document.getElementById('player1Name').textContent = gameState.player1.name;
+            document.getElementById('player1Score').textContent = gameState.player1.score;
+            document.getElementById('player2Name').textContent = gameState.player2?.name || 'Esperando...';
+            document.getElementById('player2Score').textContent = gameState.player2?.score || 0;
+
+            // Marcar turno activo
+            const player1Card = document.getElementById('player1Card');
+            const player2Card = document.getElementById('player2Card');
+            
+            player1Card.classList.toggle('active', gameState.currentTurn === 'player1');
+            player2Card.classList.toggle('active', gameState.currentTurn === 'player2');
+
+            // Actualizar pregunta
+            if (gameState.currentQuestion) {
+                document.getElementById('questionText').textContent = gameState.currentQuestion.question;
+                renderAnswers();
+            }
+
+            // Habilitar/deshabilitar controles según turno
+            const isMyTurn = gameState.currentTurn === currentPlayerId;
+            document.getElementById('answerInput').disabled = !isMyTurn;
+            document.querySelector('.answer-controls button').disabled = !isMyTurn;
+        }
+
+        function renderAnswers() {
+            const grid = document.getElementById('answersGrid');
+            grid.innerHTML = '';
+
+            gameState.currentQuestion.answers.forEach((answer, index) => {
+                const isRevealed = gameState.revealedAnswers.includes(index);
+                
+                const card = document.createElement('div');
+                card.className = 'answer-card' + (isRevealed ? ' revealed' : '');
+                
+                card.innerHTML = `
+                    <div class="answer-number">${index + 1}</div>
+                    <div class="answer-text ${isRevealed ? '' : 'hidden'}">
+                        ${isRevealed ? answer.text : ''}
+                    </div>
+                    <div class="answer-points" style="${isRevealed ? '' : 'opacity: 0;'}">
+                        ${isRevealed ? answer.points : ''}
+                    </div>
+                `;
+
+                grid.appendChild(card);
+            });
+        }
+
+        async function submitAnswer() {
+            const input = document.getElementById('answerInput');
+            const answer = input.value.trim().toLowerCase();
+            
+            if (!answer) return;
+
+            playSound('click');
+            input.value = '';
+
+            // Verificar si la respuesta es correcta
+            const correctAnswerIndex = gameState.currentQuestion.answers.findIndex(
+                ans => ans.text.toLowerCase().includes(answer) || answer.includes(ans.text.toLowerCase())
+            );
+
+            if (correctAnswerIndex !== -1 && !gameState.revealedAnswers.includes(correctAnswerIndex)) {
+                // Respuesta correcta
+                playSound('correct');
+                
+                const points = gameState.currentQuestion.answers[correctAnswerIndex].points;
+                const updates = {};
+                
+                updates[`revealedAnswers/${gameState.revealedAnswers.length}`] = correctAnswerIndex;
+                updates[`${currentPlayerId}/score`] = (gameState[currentPlayerId].score || 0) + points;
+                updates['accumulatedPoints'] = (gameState.accumulatedPoints || 0) + points;
+
+                // Verificar si es la última respuesta (ROBO DE PUNTOS)
+                if (gameState.revealedAnswers.length === 5) {
+                    const totalPoints = gameState.accumulatedPoints + points + 500;
+                    updates[`${currentPlayerId}/score`] = (gameState[currentPlayerId].score || 0) + points + 500;
+                    
+                    await database.ref('rooms/' + currentRoomId).update(updates);
+                    
+                    showRobbery(totalPoints);
+                    setTimeout(() => endGame(), 3000);
+                } else {
+                    await database.ref('rooms/' + currentRoomId).update(updates);
+                    // El jugador mantiene el turno
+                    resetTimer();
+                }
+            } else {
+                // Respuesta incorrecta
+                playSound('wrong');
+                
+                // Cambiar turno
+                const nextTurn = gameState.currentTurn === 'player1' ? 'player2' : 'player1';
+                await database.ref('rooms/' + currentRoomId).update({
+                    currentTurn: nextTurn
+                });
+                
+                resetTimer();
+            }
+        }
+
+        function showRobbery(points) {
+            playSound('robbery');
+            document.getElementById('robberyPoints').textContent = '+' + points;
+            document.getElementById('robberyOverlay').classList.add('active');
+            
+            setTimeout(() => {
+                document.getElementById('robberyOverlay').classList.remove('active');
+            }, 2500);
+        }
+
+        // ============================================
+        // TEMPORIZADOR
+        // ============================================
+        function startTimer() {
+            let timeLeft = 20;
+            updateTimerDisplay(timeLeft);
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay(timeLeft);
+
+                if (timeLeft <= 5) {
+                    document.getElementById('timer').classList.add('warning');
+                }
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    if (gameState.currentTurn === currentPlayerId) {
+                        // Cambiar turno automáticamente
+                        const nextTurn = currentPlayerId === 'player1' ? 'player2' : 'player1';
+                        database.ref('rooms/' + currentRoomId + '/currentTurn').set(nextTurn);
+                    }
+                    resetTimer();
+                }
+            }, 1000);
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            document.getElementById('timer').classList.remove('warning');
+            startTimer();
+        }
+
+        function updateTimerDisplay(time) {
+            document.getElementById('timerValue').textContent = time;
+        }
+
+        // ============================================
+        // FIN DEL JUEGO
+        // ============================================
+        async function endGame() {
+            clearInterval(timerInterval);
+            
+            const player1Score = gameState.player1.score;
+            const player2Score = gameState.player2.score;
+            
+            const isWinner = (currentPlayerId === 'player1' && player1Score > player2Score) ||
+                           (currentPlayerId === 'player2' && player2Score > player1Score);
+            
+            const finalScore = currentPlayerId === 'player1' ? player1Score : player2Score;
+
+            // Actualizar ranking
+            await updateRanking(currentPlayerName, finalScore);
+
+            // Mostrar resultado
+            showScreen('resultScreen');
+            
+            if (isWinner) {
+                document.getElementById('resultTitle').textContent = '🏆 ¡GANASTE!';
+                document.getElementById('resultTitle').className = 'result-title winner';
+                document.getElementById('resultMessage').textContent = '¡Felicidades, eres el campeón!';
+            } else {
+                document.getElementById('resultTitle').textContent = '😢 PERDISTE';
+                document.getElementById('resultTitle').className = 'result-title loser';
+                document.getElementById('resultMessage').textContent = 'Mejor suerte la próxima vez';
+                
+                // Mostrar anuncio para el perdedor
+                setTimeout(() => showAd(), 2000);
+            }
+            
+            document.getElementById('finalScore').textContent = finalScore + ' pts';
+
+            // Limpiar sala
+            database.ref('rooms/' + currentRoomId).remove();
+            currentRoomId = null;
+        }
+
+        // ============================================
+        // RANKING
+        // ============================================
+        async function updateRanking(playerName, score) {
+            try {
+                const rankingRef = database.ref('ranking');
+                const newEntry = rankingRef.push();
+                await newEntry.set({
+                    name: playerName,
+                    score: score,
+                    timestamp: Date.now()
+                });
+            } catch (error) {
+                console.error('Error al actualizar ranking:', error);
+            }
+        }
+
+        async function showRanking() {
+            playSound('click');
+            showScreen('rankingScreen');
+
+            try {
+                const snapshot = await database.ref('ranking')
+                    .orderByChild('score')
+                    .limitToLast(20)
+                    .once('value');
+
+                const ranking = [];
+                snapshot.forEach((child) => {
+                    ranking.push(child.val());
+                });
+
+                ranking.reverse(); // Ordenar de mayor a menor
+
+                const rankingList = document.getElementById('rankingList');
+                rankingList.innerHTML = '';
+
+                ranking.forEach((entry, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'ranking-item' + (index === 0 ? ' top-1' : '');
+                    item.innerHTML = `
+                        <div class="ranking-position">${index + 1}</div>
+                        <div class="ranking-name">${entry.name}</div>
+                        <div class="ranking-score">${entry.score}</div>
+                    `;
+                    rankingList.appendChild(item);
+                });
+            } catch (error) {
+                console.error('Error al cargar ranking:', error);
+            }
+        }
+
+        // ============================================
+        // ANUNCIOS
+        // ============================================
+        function showAd() {
+            showScreen('adScreen');
+            let countdown = 5;
+            document.getElementById('adCountdown').textContent = countdown;
+
+            const adInterval = setInterval(() => {
+                countdown--;
+                document.getElementById('adCountdown').textContent = countdown;
+
+                if (countdown <= 0) {
+                    clearInterval(adInterval);
+                    document.getElementById('skipAdBtn').style.display = 'block';
+                }
+            }, 1000);
+        }
+
+        function skipAd() {
+            playSound('click');
+            showScreen('resultScreen');
+        }
+
+        // ============================================
+        // NAVEGACIÓN
+        // ============================================
+        function playAgain() {
+            playSound('click');
+            showScreen('homeScreen');
+        }
+
+        function goHome() {
+            playSound('click');
+            if (currentRoomId) {
+                database.ref('rooms/' + currentRoomId).remove();
+            }
+            currentRoomId = null;
+            currentPlayerId = null;
+            showScreen('homeScreen');
+        }
+
+        // ============================================
+        // INICIALIZACIÓN
+        // ============================================
+        window.addEventListener('load', () => {
+            console.log('App cargada');
+            playSound('click');
+        });
+
+        // Prevenir zoom en iOS
+        document.addEventListener('gesturestart', function (e) {
+            e.preventDefault();
+        });
+    </script>
+</body>
+</html>
